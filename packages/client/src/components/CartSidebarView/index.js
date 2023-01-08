@@ -69,7 +69,7 @@ const CartSidebarView = () => {
         <div className='cart-checkout'>
           <div className="coupons">
             <input type="text" onChange={handleChange} placeholder='coupon discount code' />
-            <button onClick={couponSubmit}>Dis</button>
+            <button onClick={couponSubmit}>Apply</button>
             <p>CouponName : {
               state.couponName && state.couponName
             }</p>
