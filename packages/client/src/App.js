@@ -15,7 +15,6 @@ function App() {
           <Route exact path='/p/:pid' component={ProductDetailPage} />
           <Route exact path='/cart' component={ShoppingCartPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
-
           <Route
             component={({ location }) => {
               return (

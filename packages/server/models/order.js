@@ -28,10 +28,6 @@ const orderSchema = new mongoose.Schema(
     orderTotal: {
       type: Number,
       required: true,
-    },
-    couponCode: {
-      type: String,
-      unique: true,
     }
   },
   { timestamps: true }

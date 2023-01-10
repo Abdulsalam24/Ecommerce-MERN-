@@ -20,9 +20,9 @@ export default function CheckoutPage(props) {
     
     let orderData = {
       customerDetails: orderFormData,
+      
       items: state.cart,
       orderTotal: state.cartTotal,
-      couponCode : state.couponName
     }
     
     setData({
