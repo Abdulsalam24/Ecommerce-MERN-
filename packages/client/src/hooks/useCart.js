@@ -13,8 +13,9 @@ const calculateCartTotal = (cartItems) => {
 }
 
 const reducer = (state, action) => {
-  let nextCart = [...state?.cart];
+  let nextCart = [...state.cart];
 
+  const cart = localStorage.setItem("cart", JSON.stringify(state))
 
   switch (action.type) {
     case 'ADD_ITEM':
@@ -44,6 +45,7 @@ const reducer = (state, action) => {
         itemCount: state.itemCount + 1,
         cartTotal: calculateCartTotal(nextCart),
       }
+      localStorage.setItem("cart", JSON.stringify(addCart))
 
       return {
         ...addCart
@@ -64,17 +66,21 @@ const reducer = (state, action) => {
         cartTotal: calculateCartTotal(nextCart),
       }
 
+      localStorage.setItem("cart", JSON.stringify(removeCart))
+
       return {
         ...removeCart
       }
     case 'REMOVE_ALL_ITEMS':
-      let quantity = state?.cart.find((i) => i._id === action.payload).quantity
+      let quantity = state.cart.find((i) => i._id === action.payload).quantity
       const removeAllItem = {
         ...state,
-        cart: state?.cart.filter((item) => item._id !== action.payload),
+        cart: state.cart.filter((item) => item._id !== action.payload),
         itemCount: state.itemCount > 0 ? state.itemCount - quantity : 0,
         cartTotal: 0,
       }
+
+      localStorage.setItem("cart", JSON.stringify(removeAllItem))
 
       return {
         ...removeAllItem
@@ -103,6 +109,8 @@ const reducer = (state, action) => {
         cartTotal: calculateCartTotal(nextCart),
       }
 
+      localStorage.setItem("cart", JSON.stringify(editItem))
+
       return {
         ...editItem
       }
@@ -112,8 +120,9 @@ const reducer = (state, action) => {
         itemCount: 0,
         cartTotal: 0,
       }
-      return { ...resetItem }
+      localStorage.setItem("cart", JSON.stringify(resetItem))
 
+      return { ...resetItem }
     default:
       return state
   }
@@ -126,7 +135,8 @@ const cartContext = createContext()
 // Provider component that wraps your app and makes cart object ...
 // ... available to any child component that calls useCart().
 export function ProvideCart({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const inCart = JSON.parse(localStorage.getItem("cart"))
+  const [state, dispatch] = useReducer(reducer, inCart)
 
   return (
     <cartContext.Provider
@@ -187,9 +197,8 @@ const useProvideCart = () => {
     })
   }
 
-
   const isItemInCart = (id) => {
-    return !!state?.cart.find((item) => item._id === id)
+    return !!state.cart.find((item) => item._id === id)
   }
 
   /*  Check for saved local cart on load and dispatch to set initial state

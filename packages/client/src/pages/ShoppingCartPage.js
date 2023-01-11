@@ -17,7 +17,7 @@ export default function ShoppingCartPage() {
               <Card.Title>Shopping Cart</Card.Title>
             </Card.Body>
             <ListGroup className='list-group-flush'>
-              {state.cart.length > 0 ? (
+              {state?.cart.length > 0 ? (
                 <div className='cart-body'>
                   <CartList
                     cartItems={state.cart}

@@ -38,8 +38,7 @@ export default function ProductCard({ product }) {
                 <Link to={`p/${product._id}`}>{product.name}</Link>
               </Col>
               <Col className='text-right font-weight-bold'>
-                {product.price}
-
+                ${product.price}
               </Col>
             </Row>
           </Card.Title>

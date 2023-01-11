@@ -1,7 +1,7 @@
+import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
 export default function CartSummary({ cartTotal }) {
-
 
   return (
     <div className='cart-summary'>
@@ -19,7 +19,7 @@ export default function CartSummary({ cartTotal }) {
             <p className='summary-label'>Total</p>
           </Col>
           <Col xs='3' className='text-right'>
-            <p className='summary-value'>{cartTotal}</p>
+            <p className='summary-value'>${cartTotal}</p>
           </Col>
         </Row>
       </Container>
