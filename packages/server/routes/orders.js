@@ -19,6 +19,7 @@ router
       customerDetails: { firstName, lastName, email, address1, address2 },
       items,
       orderTotal,
+    
     } = req.body
 
 
@@ -31,6 +32,7 @@ router
       customerAddress2: address2,
       items: itemIdList,
       orderTotal,
+  
     }
 
 

@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons/faShoppingBag'
 import { useUI, useProvideCart } from 'hooks'
 import CartSidebar from 'components/CartSidebar'
+import UseCurrency from 'hooks/useCurrency '
 export default function Header() {
   const { openSidebar } = useUI()
+
+  const { toggleCurrency } = UseCurrency()
 
   const { state } = useProvideCart()
 
@@ -28,6 +31,10 @@ export default function Header() {
               <Nav.Link>Shop</Nav.Link>
             </LinkContainer>
 
+            <div>
+              <button style={{ border: "none", backgroundColor: "white", padding: "5px 10px" }} onClick={toggleCurrency}>USD/EURO CONVERTER</button>
+            </div>
+
             <div
               className='d-flex align-items-center ml-1'
               onClick={openSidebar}
@@ -35,7 +42,7 @@ export default function Header() {
             >
               Cart
               <FontAwesomeIcon className='ml-2 mb-1' icon={faShoppingBag} style={{ color: 'white' }} />
-              {state?.itemCount > 0 && (
+              {state.itemCount > 0 && (
                 <Badge pill variant='primary' className='mb-4 mr-2'>
                   <p className='mb-0'>{state.itemCount}</p>
                 </Badge>

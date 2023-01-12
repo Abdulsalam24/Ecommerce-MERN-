@@ -123,6 +123,7 @@ const reducer = (state, action) => {
       localStorage.setItem("cart", JSON.stringify(resetItem))
 
       return { ...resetItem }
+
     default:
       return state
   }
@@ -197,6 +198,8 @@ const useProvideCart = () => {
     })
   }
 
+
+
   const isItemInCart = (id) => {
     return !!state.cart.find((item) => item._id === id)
   }
@@ -220,6 +223,7 @@ const useProvideCart = () => {
     resetCart,
     isItemInCart,
     editItem,
+    
   }
 }
 

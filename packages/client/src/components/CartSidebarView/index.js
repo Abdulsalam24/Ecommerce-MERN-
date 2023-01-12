@@ -22,7 +22,6 @@ const CartSidebarView = () => {
   }
 
 
- 
   return (
     <div className='cart'>
       <header className='cart-header'>
@@ -37,7 +36,7 @@ const CartSidebarView = () => {
         )}
       </header>
 
-      {state?.cart.length > 0 ? (
+      {state.cart.length > 0 ? (
         <div className='cart-body'>
           <CartList cartItems={state.cart} />
         </div>
@@ -48,9 +47,9 @@ const CartSidebarView = () => {
         </div>
       )}
 
-      {state?.cart.length > 0 && (
+      {state.cart.length > 0 && (
         <div className='cart-checkout'>
-   
+
           <CartSummary cartTotal={state.cartTotal} />
           <CheckoutBox
             handleShopping={handleClose}

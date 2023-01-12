@@ -5,9 +5,11 @@ import { faShoppingBag } from '@fortawesome/free-solid-svg-icons/faShoppingBag'
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
 import { useUI, useProvideCart } from 'hooks'
 import './ProductBox.scss'
+import UseCurrency from 'hooks/useCurrency '
 
 export default function ProductBox({ product }) {
   const { openSidebar } = useUI()
+  const { getPrice } = UseCurrency()
   const { addItem, removeItem, isItemInCart } = useProvideCart()
 
   const handleAddToCart = () => {
@@ -34,7 +36,7 @@ export default function ProductBox({ product }) {
             </div>
             <div className='col-6 align-self-center text-right mb-2'>
               <div className='text-secondary'>
-                <h3>${product.price}</h3>
+                <h3>{getPrice(product.price)}</h3>
               </div>
             </div>
             <div className='col-12 align-self-center mb-3'>
