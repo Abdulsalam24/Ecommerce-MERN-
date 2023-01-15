@@ -19,7 +19,7 @@ router
       customerDetails: { firstName, lastName, email, address1, address2 },
       items,
       orderTotal,
-    
+      couponCode,
     } = req.body
 
 
@@ -32,7 +32,7 @@ router
       customerAddress2: address2,
       items: itemIdList,
       orderTotal,
-  
+      couponCode
     }
 
 
@@ -47,6 +47,7 @@ router
         customerAddress2: orderData.customerAddress2,
         items: orderData.items,
         orderTotal: orderData.orderTotal,
+        couponCode : orderData?.couponCode
       })
 
       const order = await newOrder.save()

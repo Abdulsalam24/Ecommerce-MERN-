@@ -43,7 +43,7 @@ const reducer = (state, action) => {
         ...state,
         cart: nextCart,
         itemCount: state.itemCount + 1,
-        cartTotal: calculateCartTotal(nextCart),
+        cartTotal: state.couponDiscount ? state.couponDiscount * calculateCartTotal(nextCart) : calculateCartTotal(nextCart),
       }
       localStorage.setItem("cart", JSON.stringify(addCart))
 
@@ -63,7 +63,7 @@ const reducer = (state, action) => {
         ...state,
         cart: nextCart,
         itemCount: state.itemCount > 0 ? state.itemCount - 1 : 0,
-        cartTotal: calculateCartTotal(nextCart),
+        cartTotal: state.couponDiscount ? state.couponDiscount * calculateCartTotal(nextCart) : calculateCartTotal(nextCart),
       }
 
       localStorage.setItem("cart", JSON.stringify(removeCart))
@@ -78,6 +78,8 @@ const reducer = (state, action) => {
         cart: state.cart.filter((item) => item._id !== action.payload),
         itemCount: state.itemCount > 0 ? state.itemCount - quantity : 0,
         cartTotal: 0,
+        couponName: '',
+        couponDiscount: null
       }
 
       localStorage.setItem("cart", JSON.stringify(removeAllItem))
@@ -123,6 +125,19 @@ const reducer = (state, action) => {
       localStorage.setItem("cart", JSON.stringify(resetItem))
 
       return { ...resetItem }
+
+    case 'APPLY_COUPON':
+      const couponDiscount = {
+        ...state,
+        cartTotal: action.payload.discount * state.cartTotal,
+        couponName: action.payload.couponName,
+        couponDiscount: action.payload.discount
+      }
+
+
+      localStorage.setItem("cart", JSON.stringify(couponDiscount))
+
+      return { ...couponDiscount }
 
     default:
       return state
@@ -198,6 +213,12 @@ const useProvideCart = () => {
     })
   }
 
+  const disCoupon = (discount, couponName) => {
+    dispatch({
+      type: 'APPLY_COUPON',
+      payload: { discount, couponName },
+    })
+  }
 
 
   const isItemInCart = (id) => {
@@ -223,7 +244,7 @@ const useProvideCart = () => {
     resetCart,
     isItemInCart,
     editItem,
-    
+    disCoupon,
   }
 }
 

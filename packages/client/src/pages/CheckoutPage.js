@@ -22,6 +22,7 @@ export default function CheckoutPage(props) {
       customerDetails: orderFormData,
       items: state.cart,
       orderTotal: state.cartTotal,
+      couponCode : state.couponName
     }
     
     setData({
